@@ -23,21 +23,26 @@ class Leilao:
     def __init__(self, descricao):
         self.descricao = descricao
         self.__lances = []
-
-    @property
-    def lances(self):
-        return self.__lances
-
-
-class Avaliador:
-
-    def __init__(self):
         self.maior_lance = sys.float_info.min
         self.menor_lance = sys.float_info.max
 
-    def avalia(self, leilao: Leilao):
-        for lance in leilao.lances:
-            if lance.valor > self.maior_lance:
-                self.maior_lance = lance.valor
-            if lance.valor < self.menor_lance:
-                self.menor_lance = lance.valor
+    def propoe(self, lance: Lance):
+        if lance.valor > self.maior_lance:
+            self.maior_lance = lance.valor
+        if lance.valor < self.menor_lance:
+            self.menor_lance = lance.valor
+        self.__lances.append(lance)
+
+    @property
+    def lances(self):
+        '''
+            self.__lances[:] é uma cópia rasa.
+            Cópia rasa:
+                Quando utilizamos uma cópia rasa, apenas a referência da lista, 
+                neste caso, é diferente. Todos os outros objetos dentro dessa lista 
+                compartilham a mesma referência. Ou seja, apenas da lista de lances 
+                ser uma cópia, os lances dentro da lista copiada são os mesmos lances do leilão.
+                Para que os lances sejam diferentes, precisamos copiar a lista profundamente, 
+                por isso os termos cópia rasa e cópia profunda.
+        '''
+        return self.__lances[:]
