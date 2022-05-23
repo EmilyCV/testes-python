@@ -1,5 +1,7 @@
 from unittest import TestCase, main
-from dominio import Usuario, Lance, Leilao
+from src.leilao.dominio import Lance, Leilao, Usuario
+
+# from src.leilao.dominio import Usuario, Lance, Leilao
 
 """
 Classe de Equivalência:
