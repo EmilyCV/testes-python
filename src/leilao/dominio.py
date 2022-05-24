@@ -1,14 +1,31 @@
+from src.leilao.excecoes import LanceInvalido
 import sys
 
 
 class Usuario:
 
-    def __init__(self, nome):
+    def __init__(self, nome, carteira):
         self.__nome = nome
+        self.__carteira = carteira
+
+    def propoe_lance(self, leilao, valor):
+        if not self._valor_eh_valido(valor):
+            raise LanceInvalido(
+                'Não pode propor um lance com o valor maior que o valor da carteira')
+        lance = Lance(self, valor)
+        leilao.propoe(lance)
+        self.__carteira -= valor
 
     @property
     def nome(self):
         return self.__nome
+
+    @property
+    def carteira(self):
+        return self.__carteira
+
+    def _valor_eh_valido(self, valor):
+        return valor <= self.__carteira
 
 
 class Lance:
