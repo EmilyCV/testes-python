@@ -1,5 +1,5 @@
-from unittest import TestCase, main
 from src.leilao.dominio import Lance, Leilao, Usuario
+from unittest import TestCase, main
 
 # from src.leilao.dominio import Usuario, Lance, Leilao
 
