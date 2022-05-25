@@ -21,4 +21,4 @@ avaliador = Avaliador()
 avaliador.avalia(leilao)
 
 print(
-    f'O menor lance foi de {avaliador.menor_lance} e o maior lance foi de {avaliador.maior_lance}')
+    f"O menor lance foi de {avaliador.menor_lance} e o maior lance foi de {avaliador.maior_lance}")
