@@ -8,9 +8,9 @@ class Usuario:
         self.__carteira = carteira
 
     def propoe_lance(self, leilao, valor):
-        if self._valor_eh_valido(valor):
+        if self._valor_e_invalido(valor):
             raise LanceInvalido(
-                'Não pode propor um lance com o valor maior que o valor da carteira')
+                "Não pode propor um lance com o valor maior que o valor da carteira")
         lance = Lance(self, valor)
         leilao.propoe(lance)
         self.__carteira -= valor
@@ -23,7 +23,7 @@ class Usuario:
     def carteira(self):
         return self.__carteira
 
-    def _valor_eh_valido(self, valor):
+    def _valor_e_invalido(self, valor):
         return valor > self.__carteira
 
 
@@ -48,8 +48,6 @@ class Leilao:
                 self.menor_lance = lance.valor
             self.maior_lance = lance.valor
             self.__lances.append(lance)
-        else:
-            raise ValueError('Erro ao propor lance')
 
     @property
     def lances(self):
@@ -69,10 +67,16 @@ class Leilao:
         return self.__lances
 
     def _usuarios_diferentes(self, lance):
-        return self.__lances[-1].usuario != lance.usuario
+        if self.__lances[-1].usuario != lance.usuario:
+            return True
+        raise LanceInvalido(
+            "O mesmo usuário não pode dar dois lances seguidos")
 
     def _valor_maior_que_lance_anterior(self, lance):
-        return lance.valor > self.__lances[-1].valor
+        if lance.valor > self.__lances[-1].valor:
+            return True
+        raise LanceInvalido(
+            "O valor do lance deve ser maior que o lance anterior")
 
     def _lance_eh_valido(self, lance):
         return not self._tem_lances() or \
