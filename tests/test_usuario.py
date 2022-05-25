@@ -5,12 +5,12 @@ from src.leilao.excecoes import LanceInvalido
 
 @pytest.fixture
 def vini():
-    return Usuario('Vini', 100.0)
+    return Usuario("Vini", 100.0)
 
 
 @pytest.fixture
 def leilao():
-    return Leilao('Celular')
+    return Leilao("Celular")
 
 
 def test_deve_subtrair_valor_da_carteira_do_usuario_quando_este_propor_um_lance(vini, leilao):
